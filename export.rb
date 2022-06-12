@@ -88,9 +88,9 @@ class Exporter
 
     new_candidates = []
     candidates.each do |candidate|
-      new_candidates << candidate.entries.select do |x|
-        x.basename.to_s.downcase.unicode_normalize == path.basename.to_s.downcase.unicode_normalize
-      end.map { |x| candidate + x }
+      new_candidates.concat(candidate.entries.select do |x|
+        x.basename.to_s.unicode_normalize.downcase == path.basename.to_s.unicode_normalize.downcase
+      end.map { |x| candidate + x })
     end
 
     new_candidates
